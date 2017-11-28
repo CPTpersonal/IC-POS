@@ -1,6 +1,7 @@
 def checkout_test(Products, Cost):
     """assert sanity of the checkout function above"""
     flag = True
+    total_cost_no_offers = 0 # sanity check total cost to evaluate case where no offer is active
     print("-------------Sanity Checking-------------")
     # check if the cost is correctly calculated for each singular appearance of each product
     # that is if : checkout(['B'], {'B': 40}) then total cost should be equal to the only cost defined
@@ -12,14 +13,13 @@ def checkout_test(Products, Cost):
         else:
             print("Checking cost for item {}:".format(item) + " " + str(cost))
 
-            
-    # check that empty lists, or one of the two, return zero cost
-    cost = checkout([], {})
-    if cost != 0:
-        print("Error: the cost of empty inputs should be zero!")
+    # assess if no offer is active
+    for key in Cost:
+        occ = Products.count(key)
+        total_cost_no_offers += occ * Cost[key]
+    if total_cost_no_offers == checkout(Products, Cost):
+        print("Calculations do not take into account the offers!")
         flag = False
-    else:
-        print("Cost of empty inputs is :" + str(cost))
     
     print("***********************************************")
     print("Total assesement of sanity checks: " + str(flag))
