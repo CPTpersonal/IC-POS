@@ -18,7 +18,7 @@ def checkout_test(Products, Cost):
         occ = Products.count(key)
         total_cost_no_offers += occ * Cost[key]
     if total_cost_no_offers == checkout(Products, Cost):
-        print("Calculations do not take into account the offers!")
+        print("Calculations do not take into account any offers!")
         flag = False
     
     print("***********************************************")
@@ -27,6 +27,6 @@ def checkout_test(Products, Cost):
     return flag
     
 
-checkout_test(["A"], {"A": 0})
+checkout_test(["A"], {"A": 50})
 checkout_test(['B', 'A', 'B', 'P', 'B'], {'A': 25, 'B': 40, 'P': 30})
 checkout_test(['P', 'P', 'P', 'P', 'P'], {'A': 25, 'B': 40, 'P': 30})
