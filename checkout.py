@@ -1,7 +1,9 @@
+import sys
 
 def  checkout(Products, Cost):
     """This function answers queries on products and their total cost"""
     total_cost = 0 # initializing total cost
+    
     # first do a sanity check on inputs
     if type(Products) is not list or type(Cost) is not dict:
         print("Error: The products must be in a list and the costs in a dictionary. Exiting...")
@@ -16,18 +18,22 @@ def  checkout(Products, Cost):
         else:
             # executing what the function is supposed to implement now:
             for key in Cost:
-                occ = Products.count(key) # find the occurencies of each key
-                if key == 'A':
-                    total_cost += int(occ / 3)*(Cost[key]*2) + (occ % 3)*Cost[key]
-                elif key == 'B':
-                        total_cost += int(occ / 3)*100 + (occ % 3)*Cost[key]
-                elif key == 'P':
-                    total_cost += occ*Cost[key]
+                if Cost[key] > 0:
+                    occ = Products.count(key) # find the occurencies of each key
+                    if key == 'A':
+                        total_cost += int(occ / 3)*(Cost[key]*2) + (occ % 3)*Cost[key]
+                    elif key == 'B':
+                            total_cost += int(occ / 3)*100 + (occ % 3)*Cost[key]
+                    elif key == 'P':
+                        total_cost += occ*Cost[key]
+                else:
+                    print("Error: negative cost detected!!! Exiting...")
+                    sys.exit()
                     
     print("Total associated cost based on offers is: {:f} pence".format(total_cost))
     return total_cost
         
 checkout(['B', 'A', 'B', 'P', 'B'], {'A': 25, 'B': 40, 'P': 30})
-checkout(['B', 'B', 'B', 'B', 'B'], {'A': 25, 'B': 40, 'P': 30})
+checkout(['B', 'B', 'B'], {'A': 25, 'B': 40, 'P': 30})
 checkout(['A', 'A', 'A', 'A', 'A'], {'A': 25, 'B': 40, 'P': 30})
 checkout(['P', 'P', 'P', 'P', 'P'], {'A': 25, 'B': 40, 'P': 30})
