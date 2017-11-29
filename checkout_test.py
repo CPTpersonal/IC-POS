@@ -1,3 +1,5 @@
+from checkout import checkout
+
 def checkout_test(Products, Cost):
     """assert sanity of the checkout function above"""
     flag = True
